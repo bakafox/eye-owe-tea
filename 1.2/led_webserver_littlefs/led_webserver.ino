@@ -1,14 +1,36 @@
 // https://iotdesignpro.com/projects/esp8266-based-webserver-to-control-led-from-webpage
+// https://github.com/earlephilhower/arduino-littlefs-upload (СМ. README!!!)
 #include <ESP8266WiFi.h>
+#include <LittleFS.h>
 
-const int SERVER_PORT = 9612;
-WiFiServer server(SERVER_PORT); // Класс нашего Wi-Fi сервера на порту 9612
-// "РЯЯ СПАЛИЛ ЛОГИНПАРОЛЬ" -- Да пофиг уже, будете мимо ВЦ проходить подключайтесь, роутер-то не мой :)
-const char* WIFI_SSID = "IIR_WiFi";   
-const char* WIFI_PASS = "deeprobotics";
+const char* FILE_WIFI = "/wifi.txt";
+// const char* FILE_LOGS = "/logs.txt";
+
+WiFiServer server(24680); // Временное значение порта на момент инициализации!
 
 // Имя "LED", походу, используется встроенным светодиодом, и это и вызывало конфликт!
 int MY_LED = D3; // Номер порта (D3, согласно распиновке, это GPIO0)
+int LED = D4;
+
+
+// В этой гаўне даже аналога ls нет! Лооооол...
+// Реализация взята отсюда: https://github.com/littlefs-project/littlefs/issues/2
+void listAllFilesInDir(String dir_path) {
+	Dir dir = LittleFS.openDir(dir_path);
+
+	while(dir.next()) {
+        if (dir.isFile()) {
+            Serial.print("File: ");
+            Serial.println(dir_path + dir.fileName());
+        }
+
+        if (dir.isDirectory()) {
+            Serial.print("Dir: ");
+            Serial.println(dir_path + dir.fileName() + "/");
+            listAllFilesInDir(dir_path + dir.fileName() + "/");
+        }
+    }
+}
 
 
 // Особая функция для Arduino, сработает при первом запуске!
@@ -18,25 +40,48 @@ void setup() {
     // (значение по умолчанию, можно и другое использовать)
 
     pinMode(MY_LED, OUTPUT); // Устанавалиаем режим порта на выход
+    pinMode(LED, OUTPUT);
 
-    Serial.print("Connecting to the Network");
-    WiFi.begin(WIFI_SSID, WIFI_PASS);
+    // Почему в Ордуине такая всратая работа с ФС?
+    LittleFS.begin();
+    listAllFilesInDir("/");
+
+    if (!LittleFS.exists(FILE_WIFI)) {
+        // Ctrl+Shift+P --> "Upload LittleFS to ..."; Перед этим закрыть монитор порта!
+        Serial.println("FILE_WIFI not found! Have you forgot to update LittleFS???");
+        return;
+    }
+    File f = LittleFS.open(FILE_WIFI, "r");
+
+    const int server_port = f.readStringUntil('\n').toInt();
+    String wifi_ssid = f.readStringUntil('\n');//.c_str();
+    String wifi_pass = f.readStringUntil('\n');//.c_str();
+    Serial.println(server_port);
+    Serial.println(wifi_ssid);
+    Serial.println(wifi_pass);
+
+    server = WiFiServer(server_port); // Переоткрываем сервер на нужном порту
+    Serial.print("Connecting to the network");
+    WiFi.begin(wifi_ssid, wifi_pass); // Логинимся в сеть!
 
     while (WiFi.status() != WL_CONNECTED) {
+        if (WiFi.status() == WL_CONNECT_FAILED) {
+            Serial.println("Connection Failed! Aborting.");
+            return;
+        }
         delay(500);
         Serial.print(".");
     }
 
 
     Serial.println("");
-    Serial.println("Wi-Fi connected"); 
+    Serial.println("Wi-Fi connected, starting server..."); 
     server.begin(); // Запуск сервера
-    Serial.println("Server started");
 
-    Serial.print("Copy and paste the following URL: ");
+    Serial.print("Success! Copy and paste the following URL: ");
     Serial.print(WiFi.localIP());
     Serial.print(":");
-    Serial.print(SERVER_PORT);
+    Serial.print(server_port);
     Serial.println("");
 }
 
@@ -66,6 +111,7 @@ void loop() {
     }
 
     digitalWrite(MY_LED, value); // Включаем/Выключаем светодиод
+    digitalWrite(LED, !value);
 
 
     client.println("HTTP/1.1 200 OK"); // Стартовая строка
