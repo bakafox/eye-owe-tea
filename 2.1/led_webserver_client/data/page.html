@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>я и диод</title>
+</head>
+
+<body>
+    <style>
+        body {
+            background-color: pink;
+        }
+
+        button {
+            background-color: white;
+            border: 0; border-radius: 100px;
+            padding: 20px;
+
+            &:hover {
+                opacity: .7;
+            }
+        }
+
+        h1 {
+            background-color: white; color: darkred;
+        }
+
+        h2 {
+            background-color: darkorange; color: white;
+            font-style: italic;
+            font-weight: 700;
+        }
+    </style>
+
+    <h1>*** кнопачьке!!&nbsp;~^__^~ ***</h1>
+    
+    <h2>Красный диодик</h2>
+    <button onclick="getDiod('GET', 'red')">Узнать статус</button>
+    <button onclick="getDiod('POST', 'red')">Переключить</button>
+
+    <h2>Зилоный диодик</h2>
+    <button onclick="getDiod('GET', 'green')">Узнать статус</button>
+    <button onclick="getDiod('POST', 'green')">Переключить</button>
+
+    <h2>404-й диодик (а где)</h2>
+    <button onclick="getDiod('GET', 'purple')">Узнать статус</button>
+    <button onclick="getDiod('POST', 'purple')">Переключить</button>
+
+    <script>
+        function getDiod(method, led) {
+            const url = method === 'GET' ? `/diod?led=${led}` : `/diod`
+            const options = { method: method }
+
+            if (method === 'POST') {
+                options.headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
+                options.body = `led=${led}`
+            }
+
+            fetch(url, options)
+                .then(res => res.text())
+                .then(data => alert('=== ДАННЫЕ ===\n\n' + data))
+                .catch(err => alert('=== ОШИБКА ===\n\n' + err))
+        }
+    </script>
+</body>
+
+</html>
