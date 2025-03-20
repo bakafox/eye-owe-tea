@@ -12,9 +12,11 @@ int LED_YELLOW = D2;
 int LED_GREEN = D3;
 int LED = D4; // Внутренний диодик (для отслеживания статуса)
 
-// Данные wifi- сервера
+// Данные wifi-сервера
 String server_ip = "";
 int server_port = 0;
+
+// Номер текущего состояния
 int state = 0;
 
 
@@ -22,7 +24,7 @@ void setup() {
     Serial.begin(9600); // Монитор порта -> 9600 бод
     Serial.println("");
 
-    // Устанавалиаем все порты диодов на выход
+    // Устанавливаем все порты диодов на выход
     pinMode(LED_RED, OUTPUT);
     pinMode(LED_YELLOW, OUTPUT);
     pinMode(LED_GREEN, OUTPUT);
@@ -36,14 +38,14 @@ void setup() {
         return;
     }
 
-    // Получаем логин-пареоль сети
+    // Получаем логин-пароль сети
     File f = LittleFS.open(FILE_WIFI, "r");
     const int client_port = f.readStringUntil('\n').toInt();
     String wifi_ssid = f.readStringUntil('\n');
     String wifi_pass = f.readStringUntil('\n');
     f.close();
 
-    // Логинимся в сеть!
+    // Логинимся в сеть
     Serial.print("\nConnecting to \"");
     Serial.print(wifi_ssid.c_str());
     Serial.print("\" Wi-Fi");
@@ -58,7 +60,7 @@ void setup() {
     if (WiFi.status() != WL_CONNECTED) {
         ESP.restart();
     }
-    Serial.println("Success!");
+    Serial.println("\nSuccess!");
 
     // Получаем айпишник и порт wifi-сервера
     f = LittleFS.open(FILE_SERVER, "r");
@@ -75,10 +77,11 @@ void loop() {
 
     String request = "GET /" + String(state) + " HTTP/1.1\r\nHost: " + server_ip + "\r\nConnection: close\r\n\r\n";
     client.print(request);
-    delay(100);
+    delay(50); // Оптимально от 20 до 200 мс, в зависимости от скорости сети
 
     if (!client.available()) { return; }
     String resRaw = "";
+
     // Перезаписываем хэдеры и получаем только JSON
     while (client.available()) {
         resRaw = client.readStringUntil('\r\n');
@@ -86,17 +89,18 @@ void loop() {
     client.stop();
     Serial.println(resRaw);
 
+    // Парсим и применяем полученный ответ
     digitalWrite(LED, LOW);
     JsonDocument res;
     deserializeJson(res, resRaw);
 
-    const float d = res["duration"];
+    const float duration = res["duration"];
     state = res["next"];
 
     digitalWrite(LED_RED, res["red"]);
     digitalWrite(LED_YELLOW, res["yellow"]);
     digitalWrite(LED_GREEN, res["green"]);
     
+    delay(duration * 1000.0); // сек --> мс
     digitalWrite(LED, HIGH);
-    delay(d*1000.0); // сек --> мс
 }
