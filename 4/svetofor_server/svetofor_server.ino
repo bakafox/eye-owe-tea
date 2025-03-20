@@ -66,6 +66,7 @@ void setup() {
     }
     f.close();
 
+    // Логинимся в сеть!
     Serial.print("\nConnecting to \"");
     Serial.print(wifi_ssid.c_str());
     Serial.print("\" Wi-Fi");
@@ -80,7 +81,6 @@ void setup() {
     if (WiFi.status() != WL_CONNECTED) {
         ESP.restart();
     }
-
     server = WiFiServer(server_port);
     Serial.println("\nWi-Fi connected, starting server...");
     server.begin();

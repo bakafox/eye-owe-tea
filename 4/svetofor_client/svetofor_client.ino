@@ -44,15 +44,19 @@ void setup() {
     f.close();
 
     // Логинимся в сеть!
-    Serial.print("Connecting to the network");
+    Serial.print("\nConnecting to \"");
+    Serial.print(wifi_ssid.c_str());
+    Serial.print("\" Wi-Fi");
+
     WiFi.begin(wifi_ssid, wifi_pass);
-    while (WiFi.status() != WL_CONNECTED) {
-        if (WiFi.status() == WL_CONNECT_FAILED) {
-            Serial.println("Connection Failed! Aborting.");
-            return;
-        }
+    int attempts = 0;
+    while (WiFi.status() != WL_CONNECTED && attempts < 20) {
         delay(500);
         Serial.print(".");
+        attempts++;
+    }
+    if (WiFi.status() != WL_CONNECTED) {
+        ESP.restart();
     }
     Serial.println("Success!");
 
@@ -92,7 +96,7 @@ void loop() {
     digitalWrite(LED_RED, res["red"]);
     digitalWrite(LED_YELLOW, res["yellow"]);
     digitalWrite(LED_GREEN, res["green"]);
+    
     digitalWrite(LED, HIGH);
-
     delay(d*1000.0); // сек --> мс
 }
