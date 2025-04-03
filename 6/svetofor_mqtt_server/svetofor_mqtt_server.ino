@@ -109,13 +109,11 @@ void setup() {
 }
 
 
-std::pair<String, double> getStateData(int state) {
+std::pair<String, double> getStateData() {
     std::string currentMode = modes[modeIdx];
 
     const auto& stateSequence = states[currentMode];
-    if (state < 0 || state >= stateSequence.size()) {
-        state = 0; // Если индекс некорректный, сбрасываем в 0
-    }
+    state = (state + stateSequence.size()) % stateSequence.size();
 
     int signal = stateSequence[state].first;
     double duration = stateSequence[state].second;
@@ -144,9 +142,7 @@ void loop() {
         delay(200); // Предотвращаем дребезг контактов!
                     // (не очень успешно, но лучше чем ничего)
         modeChanged = true;
-
         modeIdx = (modeIdx + 1) % modes.size();
-        state = 1;
     }
 
     unsigned long timeCurr = millis();
@@ -154,7 +150,7 @@ void loop() {
         timeSent = timeCurr;
         modeChanged = false;
 
-        auto [stateStr, newDuration] = getStateData(state);
+        auto [stateStr, newDuration] = getStateData();
         duration = newDuration * 1000; // сек --> мс
 
         if (psc.connected()) {
