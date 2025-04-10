@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN MODE</title>
+</head>
+<body>
+    <h3>Настройка Wi-Fi</h3>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('error') === '1') {
+            document.write("<p style='color:red;'>Ошибка подключения! Возможно, вы ввели некорректные данные.</p>");
+        }
+        if (urlParams.get('success') === '1') {
+            document.write("<p style='color:green;'>Данные Wi-Fi обновлены! Эту вкладку теперь можно закрыть.</p>");
+        }
+    </script>
+
+    <form action="/save">
+        <!-- Порт: <input name="port" type="number"><br> -->
+        SSID: <input name="ssid"><br>
+        Пароль: <input name="pass" type="password"><br>
+        <input type="submit" value="✅ Сохранить и подключиться">
+    </form>
+</body>
+</html>
