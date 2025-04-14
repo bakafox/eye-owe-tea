@@ -4,25 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN MODE</title>
+
+    <style>
+        #msgbox.error, #msgbox.success {
+          padding: 20px;
+          margin-bottom: 8px;
+          font-size: .92rem;
+        }
+        #msgbox.error {
+          background-color: lightgoldenrodyellow;
+          color: chocolate;
+        }
+        #msgbox.success {
+          background-color: palegreen;
+          color: green;
+        }
+
+        form {
+          display: flex;
+          flex-direction: column;
+          max-width: 400px;
+        }
+        form > input {
+          padding: 4px;
+          margin-bottom: 8px;
+        }
+    </style>
 </head>
 <body>
     <h3>Настройка Wi-Fi</h3>
 
+    <form action="/save">
+        <span id="msgbox"></span>
+
+        <!-- Порт: <input name="port" type="number"> -->
+        SSID: <input name="ssid">
+        Пароль: <input name="pass"> <!-- type="password"> -->
+
+        <input type="submit" value="✅ Сохранить и подключиться" onclick="showUpdateMessage()">
+    </form>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('error') === '1') {
-            document.write("<p style='color:red;'>Ошибка подключения! Возможно, вы ввели некорректные данные.</p>");
+        if (urlParams.get('error') !== null) {
+            document.querySelector('#msgbox').innerText = (`Ошибка подключения, код ${urlParams.get('error')}. `
+            + `Возможно, вы ввели некорректные данные, или эта сеть недоступна. Выполните настройку повторно:`);
+
+            document.querySelector('#msgbox').classList.add('error');
         }
-        if (urlParams.get('success') === '1') {
-            document.write("<p style='color:green;'>Данные Wi-Fi обновлены! Эту вкладку теперь можно закрыть.</p>");
+        function showUpdateMessage() {
+            document.querySelector('#msgbox').innerText = (`Данные Wi-Fi обновлены! Эту вкладку можно закрыть. `
+            + `Если через некоторое время после этого контроллер снова начал мигать, значит, `
+            + `выполнить вход не удалось, и вы можете попробовать произвести настройку повторно.`);
+
+            document.querySelector('#msgbox').classList.add('success');
         }
     </script>
-
-    <form action="/save">
-        <!-- Порт: <input name="port" type="number"><br> -->
-        SSID: <input name="ssid"><br>
-        Пароль: <input name="pass" type="password"><br>
-        <input type="submit" value="✅ Сохранить и подключиться">
-    </form>
 </body>
 </html>

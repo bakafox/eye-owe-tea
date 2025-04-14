@@ -13,8 +13,8 @@ const int EEPROM_SIZE = 512;
 const int EEPROM_SSID = 32;
 const int EEPROM_PASS = 64;
 
-const int RESET = 0; // Сюда прилетает сигнал от кнопки
-const int LED = D4; // Внутренний диодик (для отслеживания статуса)
+const int RESET = 0; // Внутренняя кнопка FLASH (да, оказывается, её можно программировать!)
+const int LED = D4; // Внутренний диодик (им будем мигать при ошибке подключения к сети)
 
 unsigned long blinkLast = 1;
 bool blinkIsOn = false;
@@ -41,40 +41,38 @@ void writeEEPROM(int offset, const String& data, int length) {
 }
 
 
-void handleSave() {
+void loginDataSave() {
     String ssid = server.arg("ssid");
     String pass = server.arg("pass");
 
-    if (ssid.length() > 0) {
-        server.sendHeader("Location", "/login.html?success=1", true);
-        server.send(302, "text/plain", "");
-        delay(1500);
+    writeEEPROM(0, ssid, 32);
+    writeEEPROM(32, pass, 64);
+    EEPROM.commit();
+    Serial.println("Updated EEOROM Wi-Fi data! Restaring...");
 
-        writeEEPROM(0, ssid, 32);
-        writeEEPROM(32, pass, 64);
-        EEPROM.commit();
-        Serial.println("Updated EEOROM Wi-Fi data! Restaring...");
-
-        delay(500);
-        ESP.restart();
-    }
-    else {
-        server.sendHeader("Location", "/login.html?error=1", true);
-        server.send(302, "text/plain", "");
-    }
+    delay(500);
+    ESP.restart();
 }
 
 
-void startLoginMode() {
+void startLoginMode(int ec) {
     blinkLast = 1;
 
     WiFi.mode(WIFI_AP);
     WiFi.softAP("ESP_Config");
 
-    server.serveStatic("/", LittleFS, FILE_LOGIN);
-    server.serveStatic(FILE_LOGIN, LittleFS, FILE_LOGIN);
+    server.serveStatic("/login.html", LittleFS, "/login.html");
 
-    server.on("/save", HTTP_GET, handleSave);
+    // Делаем редирект, чтобы показать код ошибки на странице
+    server.on("/", HTTP_GET, [ec]() {
+        String redirectUrl = String("/login.html?error=") + String(ec);
+
+        server.sendHeader("Location", redirectUrl);
+        server.send(302, "text/plain", "Пожалуйста, подождите…");
+    });
+
+    // Для обработки отправленного запроса с новыми данными
+    server.on("/save", HTTP_GET, loginDataSave);
 
     server.begin();
     Serial.print("AP IP: ");
@@ -93,7 +91,7 @@ void startFunniMode() {
         delay(100);
         digitalWrite(LED, HIGH);
 
-        server.send(404, "text/plain", "Not found");
+        server.send(404, "text/plain", "Запрашиваемая страница не найдена!");
     });
 
     server.begin();
@@ -111,7 +109,7 @@ void setup() {
     pinMode(RESET, INPUT);
     pinMode(LED, OUTPUT);
     digitalWrite(LED, HIGH);
-    Serial.printf("");
+    Serial.println("");
 
     // Данные для точки доступа
     String wifi_ssid = readEEPROM(0, 32);
@@ -122,6 +120,7 @@ void setup() {
     Serial.print("\nConnecting to \"");
     Serial.print(wifi_ssid.c_str());
     Serial.print("\" Wi-Fi");
+
     WiFi.begin(wifi_ssid.c_str(), wifi_pass.c_str());
 
     int tries = 0;
@@ -136,9 +135,11 @@ void setup() {
         startFunniMode();
     }
     else {
-        Serial.println("\nFailed to connect to Wi-Fi. Entering Login Mode...");
+        Serial.print("\nFailed to connect, error ");
+        Serial.print(WiFi.status());
+        Serial.println(". Entering Login Mode...");
 
-        startLoginMode();
+        startLoginMode(WiFi.status());
     }
 }
 
@@ -148,7 +149,6 @@ void loop() {
     // Кнопка сброса EEPROM-а
     if (digitalRead(RESET) == LOW) {
         for (int i = 0; i < EEPROM_SIZE; i++) {
-            
             EEPROM.write(i, 0);
         }
         EEPROM.commit();
