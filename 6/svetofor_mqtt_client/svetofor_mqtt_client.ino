@@ -124,7 +124,11 @@ void mqttSubscribe() {
     Serial.print("\" topic");
 
     while (!psc.connected()) {
-        if (psc.connect("ESP8266Client", mqtt_user.c_str(), mqtt_pass.c_str())) {
+        Serial.println(mqtt_user);
+        Serial.println(mqtt_pass);
+        Serial.println(mqtt_topic);
+
+        if (psc.connect("ESP8266Client2", mqtt_user.c_str(), mqtt_pass.c_str())) {
             psc.subscribe(mqtt_topic.c_str(), 1);
             Serial.println("\nSuccess!");
         }
@@ -133,7 +137,7 @@ void mqttSubscribe() {
             Serial.print(psc.state());
             if (psc.state() != -4) {
                 delay(500); // Чтобы не дудосить брокера килотонной запросов
-                psc.loop();
+                // psc.loop();
             }
         }
     }
