@@ -10,8 +10,8 @@
 //   3V    --------------- VCC
 //   GND   --------------- GND
 //   D8    --------------- CS
-//   D3    --------------- RESET
-//   D4    --------------- A0
+//   D4    --------------- RESET
+//   D3    --------------- A0
 //   D7    --------------- SDA
 //   D5    --------------- SCK
 //   3V    --------------- LED
@@ -62,8 +62,8 @@
 #include <SPI.h>
 
 #define TFT_CS         D8
-#define TFT_RST        D3
-#define TFT_DC         D4
+#define TFT_RST        D4
+#define TFT_DC         D3
 #define shortdelay    500
 
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
@@ -76,7 +76,7 @@ void setup(void) {
   Serial.println ();
   Serial.println ();   
   delay (shortdelay*2);   
-  Serial.println (F("Hello! ST7735 180*160 SPI TFT Test"));
+  Serial.println (F("Hello! ST7735 128*160 SPI TFT Test"));
 
   tft.initR (INITR_BLACKTAB);      // init ST7735S chip, black tab
   Serial.println (F("Initialized"));

@@ -4,63 +4,63 @@
 #include <Adafruit_GFX.h>       
 #include <Adafruit_ST7735.h> 
 #include <SPI.h>
+#include "FontsRus/Bahamas14.h"
+#include "FontsRus/FreeSans6.h"
 
-// Распиновка на сей раз:
+
+// Распиновка в порядке пинов на дисплее:
 // VCC <--> 3V (питание 3.3 В)
 // GND <--> G  (земля)
 // CS  <--> D8 (GPIO15, HSPI_CS)
 // RST <--> D3 (GPIO0)
 // A0  <--> D4 (GPIO2)
-// LED <--> 3V (пиатние 3.3 В)
 // SCK <--> D5 (GPIO14, HSPI_SCK)
-// DSA <--> D7 (GPIO13, HSPI_MOSI)
+// SDA <--> D7 (GPIO13, HSPI_MOSI)
+// LED <--> 3V (пиатние 3.3 В)
 
 #define TFT_CS  15
 #define TFT_RST 0
 #define TFT_DC  2
 
 
+const uint16_t colors[] = {
+  ST77XX_RED, ST77XX_GREEN, ST77XX_BLUE,
+  ST77XX_CYAN, ST77XX_MAGENTA, ST77XX_YELLOW, ST77XX_ORANGE
+};
+const size_t numColors = sizeof(colors) / sizeof(colors[0]);
+unsigned int currBgColor = ST77XX_BLACK;
+unsigned int currFgColor = ST77XX_YELLOW;
+
+// Момент истины! Инициализируем дисплейчик... ГООООООЛ!!
+Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
+
+
 void setup() {
-    // Момент истины! Инициализируем дисплей... ГООООООЛ!!
-    Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
-    tft.initR(INITR_GREENTAB);
-
+    // Ещё парочка небольших приготовлений
+    tft.initR(INITR_BLACKTAB);
+    tft.setRotation(1);
     tft.fillScreen(ST77XX_BLACK);
-    tft.setTextWrap(false);
-    tft.setCursor(45, 5);
-    tft.setTextSize(2);
-    tft.setTextColor(ST77XX_YELLOW);
-    tft.print("USA");
 
-    tft.setCursor(15, 25);
+    tft.setCursor(20, 90);
     tft.setTextSize(1);
     tft.setTextColor(ST77XX_WHITE);
-    tft.print("COVID-19 Tracker");
-
-    tft.setCursor(5, 45);
-    tft.setTextSize(2);
-    tft.setTextColor(ST77XX_BLUE);
-    tft.print("Cases:");
-    tft.setCursor(10, 65);
-    tft.print("929,637");  
-
-    tft.setCursor(5, 93);
-    tft.setTextSize(2);
-    tft.setTextColor(ST77XX_GREEN);
-    tft.print("RECOVERED:");
-    tft.setCursor(15, 115);
-    tft.setTextColor(ST77XX_WHITE);
-    tft.print("110,504"); 
-
-    tft.fillRect(0, 138 , 48, 10, ST77XX_WHITE); 
-    tft.setCursor(7, 140);
-    tft.setTextSize(1);
-    tft.setTextColor(ST77XX_BLACK);
-    tft.print("DEATHS:  ");
-    tft.setCursor(55, 140);
-    tft.setTextColor(ST77XX_WHITE);
-    tft.print("52,838");
+    tft.setFont(&FreeSans6pt8b);
+    tft.print("- это просто космос!");  
 } 
 
 
-void loop() { }
+void loop() {
+    // Выводим разноцветные текст и фоновый квадратик
+    tft.fillRect(20, 40, 120, 30, currBgColor);
+    tft.setCursor(25, 60);
+    tft.setTextColor(currFgColor);
+    tft.setFont(&Bahamas14pt8b);
+    tft.print("Ардуино");
+
+    currBgColor = colors[random(numColors)];
+    do {
+        currFgColor = colors[random(numColors)];
+    } while (currBgColor == currFgColor);
+
+    delay(200);
+}
