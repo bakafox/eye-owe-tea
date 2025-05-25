@@ -29,12 +29,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: "{{ _.base_path }}/Things/CombinedSensor/Services/GetHumidity"
-    name: Получение значения влажности
+  - url: "{{ _.base_path }}/Things/CombinedSensor/Services/GetTemperature"
+    name: Получение значения температуры
     meta:
       id: req_feac70cddd2e4faab171345aafaf58ce
       created: 1748117578552
-      modified: 1748152159120
+      modified: 1748160233259
       isPrivate: false
       sortKey: -1748116950147
     method: POST
@@ -58,12 +58,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: "{{ _.base_path }}/Things/CombinedSensor/Services/SetHumidity"
-    name: Установка значения влажности
+  - url: "{{ _.base_path }}/Things/CombinedSensor/Services/SetTemperature"
+    name: Установка значения температуры
     meta:
       id: req_88108be8ff78477c905657a0513f8ce2
       created: 1748150019052
-      modified: 1748152156358
+      modified: 1748160718948
       isPrivate: false
       sortKey: -1748116950097
     method: POST
@@ -72,7 +72,7 @@ collection:
     parameters:
       - id: pair_a52700244f944218ad0514157dc5074c
         name: input
-        value: "{% randomnumber 10, 90, 0, 0 %}"
+        value: "{% randomnumber 0, 50, 0, 0 %}"
         disabled: false
       - id: pair_abede900d1574533a942cbfe3b6259a7
         name: input
