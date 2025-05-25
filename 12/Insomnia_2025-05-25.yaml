@@ -1,0 +1,115 @@
+type: collection.insomnia.rest/5.0
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1748116798814
+  modified: 1748116798814
+collection:
+  - url: "{{ _.base_path }}/Things/CombinedSensor"
+    name: Обращение к CombinedSensor
+    meta:
+      id: req_f7ced7365937403ab3ed3a0995145780
+      created: 1748116950197
+      modified: 1748151133629
+      isPrivate: false
+      sortKey: -1748116950197
+    method: GET
+    headers:
+      - name: appkey
+        value: (ТУТ_НУЖНО_ВСТАВИТЬ_ВАШ_APP_KEY)
+      - name: User-Agent
+        value: insomnia/11.1.0
+    authentication:
+      type: none
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_path }}/Things/CombinedSensor/Services/GetHumidity"
+    name: Получение значения влажности
+    meta:
+      id: req_feac70cddd2e4faab171345aafaf58ce
+      created: 1748117578552
+      modified: 1748152159120
+      isPrivate: false
+      sortKey: -1748116950147
+    method: POST
+    headers:
+      - name: appkey
+        value: (ТУТ_НУЖНО_ВСТАВИТЬ_ВАШ_APP_KEY)
+        id: pair_9e647258dc3741cdb5d74236acd111f6
+      - name: User-Agent
+        value: insomnia/11.1.0
+        id: pair_7a1768b8f5fe4600a739d23855d2fa16
+      - name: Content-type
+        value: application/json
+        id: pair_d8860047342947059bf916ca5c35ab46
+    authentication:
+      type: none
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_path }}/Things/CombinedSensor/Services/SetHumidity"
+    name: Установка значения влажности
+    meta:
+      id: req_88108be8ff78477c905657a0513f8ce2
+      created: 1748150019052
+      modified: 1748152156358
+      isPrivate: false
+      sortKey: -1748116950097
+    method: POST
+    body:
+      mimeType: application/json
+    parameters:
+      - id: pair_a52700244f944218ad0514157dc5074c
+        name: input
+        value: "{% randomnumber 10, 90, 0, 0 %}"
+        disabled: false
+      - id: pair_abede900d1574533a942cbfe3b6259a7
+        name: input
+        value: potato
+        disabled: true
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_907cb20b350a476d9c9fd433262752b4
+      - name: appkey
+        value: (ТУТ_НУЖНО_ВСТАВИТЬ_ВАШ_APP_KEY)
+        id: pair_7d7a4fbb1316459b936fc8614861cfa3
+      - name: User-Agent
+        value: insomnia/11.1.0
+        id: pair_552c671089744f99a6b2f2c49c0999af
+    authentication:
+      type: none
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1748116900236
+    modified: 1748116900236
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1748116900121
+    modified: 1748150745371
+    isPrivate: false
+  data:
+    base_path: http://localhost:443/Thingworx
