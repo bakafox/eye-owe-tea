@@ -15,8 +15,8 @@
 В случае невозможности подключения к указзаной сети, устройство должно автоматически входить в сервисный режим, с отображением соответствующей индикации.
 
 Ссылки по теме:
-- https://iotprojectsideas.com/esp8266-manual-wifi-configuration-with-eeprom-without-hard-code?authuser=0
-- https://gist.github.com/dogrocker/f998dde4dbac923c47c1?authuser=0
-- https://how2electronics.com/esp8266-manual-wifi-configuration-without-hard-code-with-eeprom?authuser=0
-- https://www.embedded-robotics.com/esp8266-wifi?authuser=0
-- https://www.aranacorp.com/en/configure-an-esp8266-as-a-wi-fi-access-point?authuser=0
+- https://iotprojectsideas.com/esp8266-manual-wifi-configuration-with-eeprom-without-hard-code
+- https://gist.github.com/dogrocker/f998dde4dbac923c47c1
+- https://how2electronics.com/esp8266-manual-wifi-configuration-without-hard-code-with-eeprom
+- https://www.embedded-robotics.com/esp8266-wifi
+- https://www.aranacorp.com/en/configure-an-esp8266-as-a-wi-fi-access-point
