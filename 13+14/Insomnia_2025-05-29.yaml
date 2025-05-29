@@ -1,0 +1,93 @@
+type: collection.insomnia.rest/5.0
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1748116798814
+  modified: 1748116798814
+collection:
+  - url: http://localhost:443/Thingworx/Things/RemoteTerminal
+    name: Обращение к RemoteTerminal
+    meta:
+      id: req_f7ced7365937403ab3ed3a0995145780
+      created: 1748116950197
+      modified: 1748501905937
+      isPrivate: false
+      sortKey: -1748116950197
+    method: GET
+    headers:
+      - name: appkey
+        value: (ТУТ_НУЖНО_ВСТАВИТЬ_ВАШ_APP_KEY)
+        id: pair_817776ce5bc34630a959215aaeb55b4a
+      - name: User-Agent
+        value: insomnia/11.1.0
+        id: pair_29e28854494142a8b20c01f37d66435f
+    authentication:
+      type: none
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:443/Thingworx/Things/RemoteTerminal/Services/InOut
+    name: InOut
+    meta:
+      id: req_9a90ae6e6e744b5e90f214eddb3ea9cc
+      created: 1748150019052
+      modified: 1748502316855
+      isPrivate: false
+      sortKey: -1748116950097
+    method: POST
+    body:
+      mimeType: application/json
+    parameters:
+      - name: p
+        value: "{% prompt 'Значение свитча (0 == ВВЕРХ, 1 == ВНИЗ):', '', '0', '',
+          false, true %}"
+        disabled: false
+        id: pair_a52700244f944218ad0514157dc5074c
+        description: Знач <--> Незнач
+      - id: pair_828432ed7f534ebd8654b2e7f78e8d09
+        name: b1
+        value: "{% prompt 'Значение 1-й кнопки (+1 == нажатие кнопки):', '', '3', '',
+          false, true %}"
+        description: +1 == Инкремент
+        disabled: false
+      - id: pair_91df0e5707e1474489fc2448e15b6392
+        name: b2
+        value: "{% prompt 'Значение 2-й кнопки (+1 == нажатие кнопки):', '', '1', '',
+          false, true %}"
+        description: +1 == Декремент
+        disabled: false
+      - id: pair_e5965c5213704019a9144e4dfff9d62a
+        name: b3
+        value: "{% prompt 'Значение 3-й кнопки (+1 == нажатие кнопки):', '', '1', '',
+          false, true %}"
+        description: +1 == Инверт-ть
+        disabled: false
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0fcd2706ae8d4dc6b970fc5eccdc6a0e
+      - name: appkey
+        value: (ТУТ_НУЖНО_ВСТАВИТЬ_ВАШ_APP_KEY)
+        id: pair_22c12633e7c443b2819fbe0fe9341ec9
+      - name: User-Agent
+        value: insomnia/11.1.0
+        id: pair_3443e7d2b2e8411c91b5385a3cb67028
+      - id: pair_ad13e0bdc56e4706bf95c04244e30cd6
+        name: Accept
+        value: application/json
+        disabled: false
+    authentication:
+      type: none
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true

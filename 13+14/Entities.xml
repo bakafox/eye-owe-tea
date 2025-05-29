@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Entities build="b2013" majorVersion="8" minorVersion="4" modelPersistenceProviderPackage="H2PersistenceProviderPackage" revision="0" schemaVersion="1040" universal=""><StyleDefinitions/><Networks/><PersistenceProviderPackages/><Mashups><Mashup aspect.isResponsive="true" aspect.mashupType="mashup" columns="0.0" description="" documentationContent="" homeMashup="" lastModifiedDate="2025-05-29T12:40:32.504+06:00" name="RemoteTerminalMashup" projectName="MyLab13" rows="0.0" tags=""><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><ParameterDefinitions/><Things><Thing>RemoteTerminal</Thing></Things><ThingShapes/><ThingTemplates/><mashupContent><![CDATA[{
+  "CustomMashupCss" : "",
+  "Data" : {
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_RemoteTerminal" : {
+      "DataName" : "Things_RemoteTerminal",
+      "EntityName" : "RemoteTerminal",
+      "EntityType" : "Things",
+      "Id" : "030173d0-8142-4845-aaad-40cbeb997b72",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "1ee0bc5e-aee2-4c1d-ab6c-23929b13ba43",
+        "Name" : "GetPropertyValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetPropertyValues"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "59f0cd5b-bc7f-4932-b8c6-4c7f38e8000f",
+        "Name" : "SetPropertyValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "SetPropertyValues"
+      }, {
+        "APIMethod" : "get",
+        "Characteristic" : "Services",
+        "Id" : "b78df497-3745-4b8a-8840-d641c812a000",
+        "Name" : "SetProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "SetProperties"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "865ffadb-da30-4d60-ae53-d3752de540a8",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "number",
+      "SourcePropertyBaseType" : "INTEGER",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "NUMBER",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetPropertyValues",
+    "SourceSection" : "Things_RemoteTerminal",
+    "TargetArea" : "UI",
+    "TargetId" : "leddisplay-3",
+    "TargetSection" : ""
+  }, {
+    "Id" : "7f557f8c-608d-4c2f-ab33-7956cd65acc8",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "number",
+      "SourcePropertyBaseType" : "INTEGER",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "Value",
+      "TargetPropertyBaseType" : "NUMBER",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetPropertyValues",
+    "SourceSection" : "Things_RemoteTerminal",
+    "TargetArea" : "UI",
+    "TargetId" : "slider-5",
+    "TargetSection" : ""
+  }, {
+    "Id" : "f49e4e32-8f8b-4f59-9e18-0fd3dc5d58ed",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "NUMBER",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Maximum",
+      "TargetPropertyBaseType" : "NUMBER",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "expression-8",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "slider-5",
+    "TargetSection" : ""
+  }, {
+    "Id" : "72c66799-ee77-4de0-890e-630f158ab569",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "NUMBER",
+      "TargetProperty" : "number",
+      "TargetPropertyBaseType" : "INTEGER",
+      "TargetPropertyType" : "Property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "expression-10",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "SetProperties",
+    "TargetSection" : "Things_RemoteTerminal"
+  }, {
+    "Id" : "1dd6b1aa-710d-4522-b4b7-9b868536d4dc",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Value",
+      "SourcePropertyBaseType" : "NUMBER",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "number",
+      "TargetPropertyBaseType" : "NUMBER",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "slider-5",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "expression-10",
+    "TargetSection" : ""
+  }, {
+    "Id" : "1cab764c-3a39-4d36-92fd-e077e09423f8",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "isSigned",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "isSigned",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetPropertyValues",
+    "SourceSection" : "Things_RemoteTerminal",
+    "TargetArea" : "UI",
+    "TargetId" : "expression-7",
+    "TargetSection" : ""
+  }, {
+    "Id" : "5f84b3b4-b1ce-46b9-aba0-74c6954df377",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "isSigned",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "isSigned",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetPropertyValues",
+    "SourceSection" : "Things_RemoteTerminal",
+    "TargetArea" : "UI",
+    "TargetId" : "expression-8",
+    "TargetSection" : ""
+  }, {
+    "Id" : "c32563a2-7081-4544-8664-b22e74a40689",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "number",
+      "SourcePropertyBaseType" : "INTEGER",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "Minimum",
+      "TargetPropertyBaseType" : "NUMBER",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetPropertyValues",
+    "SourceSection" : "Things_RemoteTerminal",
+    "TargetArea" : "UI",
+    "TargetId" : "slider-5",
+    "TargetSection" : ""
+  }, {
+    "Id" : "b901c950-a9a0-4aca-a688-ad4c1158bed0",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "isSigned",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "State",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetPropertyValues",
+    "SourceSection" : "Things_RemoteTerminal",
+    "TargetArea" : "UI",
+    "TargetId" : "checkbox-11",
+    "TargetSection" : ""
+  } ],
+  "DesignTimePermissions" : {
+    "Create" : [ ],
+    "Delete" : [ ],
+    "Metadata" : [ ],
+    "Read" : [ ],
+    "Update" : [ ]
+  },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_RemoteTerminal",
+    "EventHandlerService" : "GetPropertyValues",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Refresh",
+    "EventTriggerId" : "autorefresh-9",
+    "EventTriggerSection" : "",
+    "Id" : "73261cf2-d62e-4d42-8496-3ead4fe12e26"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "expression-7",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Refresh",
+    "EventTriggerId" : "autorefresh-9",
+    "EventTriggerSection" : "",
+    "Id" : "c42fd764-76af-4620-b96a-074f52308337"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "expression-8",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Refresh",
+    "EventTriggerId" : "autorefresh-9",
+    "EventTriggerSection" : "",
+    "Id" : "daaad5fc-77a3-4668-ba69-388a807bca3e"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "expression-10",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "ValueChanged",
+    "EventTriggerId" : "slider-5",
+    "EventTriggerSection" : "",
+    "Id" : "ff5d002d-fcb1-4939-95e6-fd5f93112457"
+  } ],
+  "RunTimePermissions" : {
+    "permissions" : [ ]
+  },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButton" : "SimplePlus",
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImage" : "",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButton" : "SimpleGear",
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "Style" : "DefaultMashupStyle",
+      "StyleTheme" : "Base Theme",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "UseTheme" : false,
+      "UseThemeForHybrids" : false,
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "id_index" : 14,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "Area" : "UI",
+        "DisplayName" : "panel-2",
+        "Height" : 200,
+        "HideScrollbars" : false,
+        "HorizontalAnchor" : "left",
+        "Id" : "panel-2",
+        "Left" : 125,
+        "ResponsiveLayout" : true,
+        "ShowDataLoading" : true,
+        "Style" : "DefaultPanelStyle",
+        "Top" : 105,
+        "Type" : "panel",
+        "VerticalAnchor" : "top",
+        "Visible" : true,
+        "Width" : 300,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Панель"
+      },
+      "Widgets" : [ {
+        "Properties" : {
+          "Area" : "UI",
+          "Decimals" : 0,
+          "Digits" : 5,
+          "DisplayName" : "leddisplay-3",
+          "Height" : 56,
+          "Id" : "leddisplay-3",
+          "LEDLabelStyle" : "DefaultWidgetLabelStyle",
+          "LEDSize" : "normal",
+          "LEDStyle" : "DefaultLEDStyle",
+          "Label" : "",
+          "LabelAlignment" : "left",
+          "Left" : 260,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 185,
+          "Type" : "leddisplay",
+          "UseTheme" : false,
+          "Visible" : true,
+          "Width" : 154,
+          "Z-index" : 10,
+          "ZeroFill" : false,
+          "__TypeDisplayName" : "Светодиодное табло",
+          "__supportsLabel" : true,
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Area" : "UI",
+          "DisplayMinMaxLabels" : false,
+          "DisplayName" : "slider-5",
+          "DisplayValueLabel" : false,
+          "Height" : 55,
+          "Id" : "slider-5",
+          "Left" : 15,
+          "Maximum" : 1,
+          "Minimum" : -1,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Skin" : "Default",
+          "SliderBGStyle" : "DefaultSliderBGStyle",
+          "SliderBar" : "Thick",
+          "SliderHandle" : "Square",
+          "SliderHandleStyle" : "DefaultSliderHandleStyle",
+          "SliderMaxStyle" : "DefaultSliderMaxStyle",
+          "SliderMinStyle" : "DefaultSliderMinStyle",
+          "SliderTrackerProgressStyle" : "DefaultSliderTrackerProgressStyle",
+          "SliderTrackerStyle" : "DefaultSliderTrackerStyle",
+          "SliderValueStyle" : "DefaultSliderValueStyle",
+          "Step" : 1,
+          "SteppingMode" : true,
+          "Top" : 5,
+          "TrackingMode" : false,
+          "Type" : "slider",
+          "UseTheme" : false,
+          "Value" : 0,
+          "Vertical" : false,
+          "Visible" : true,
+          "Width" : 155,
+          "Z-index" : 10,
+          "ZeroScale" : true,
+          "__TypeDisplayName" : "Ползунок"
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "ActiveStyle" : "DefaultButtonActiveStyle",
+          "Area" : "UI",
+          "AutoRefresh" : true,
+          "AutoRefreshTabSequence" : 0,
+          "DisplayName" : "autorefresh-9",
+          "FocusStyle" : "DefaultButtonFocusStyle",
+          "Height" : 33,
+          "HoverStyle" : "DefaultButtonHoverStyle",
+          "IconAlignment" : "left",
+          "Id" : "autorefresh-9",
+          "Label" : "Обновить сейчас",
+          "Left" : 15,
+          "RefreshInterval" : 1,
+          "RefreshNowTabSequence" : 0,
+          "RefreshToggleLabel" : "Вкл.",
+          "RefreshToggleLabelOff" : "Выкл.",
+          "RefreshToggleSliderStyle" : "DefaultAutoRefreshToggleSliderStyle",
+          "RefreshToggleStyle" : "DefaultAutoRefreshToggleStyle",
+          "RefreshToggleStyleOff" : "DefaultAutoRefreshToggleOffStyle",
+          "ResponsiveLayout" : false,
+          "ShowControls" : true,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultButtonStyle",
+          "Top" : 5,
+          "Type" : "autorefresh",
+          "UseTheme" : false,
+          "Visible" : true,
+          "Width" : 185,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Автообновление"
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Area" : "UI",
+          "Disabled" : true,
+          "DisplayName" : "checkbox-11",
+          "FocusStyle" : "DefaultFocusStyle",
+          "Height" : 45,
+          "Id" : "checkbox-11",
+          "Left" : 260,
+          "Prompt" : "",
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "State" : false,
+          "Style" : "DefaultCheckboxStyle",
+          "TabSequence" : 0,
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 250,
+          "Type" : "checkbox",
+          "Visible" : true,
+          "Width" : 120,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Флажок",
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Alignment" : "right",
+          "AllowEllipsis" : false,
+          "Area" : "UI",
+          "DisplayName" : "label-13",
+          "Height" : 27,
+          "Id" : "label-13",
+          "Left" : 75,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultLabelStyle",
+          "Text" : "&#1063;&#1080;&#1089;&#1083;&#1086;:",
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 200,
+          "Type" : "label",
+          "Visible" : true,
+          "Width" : 175,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Метка",
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Alignment" : "right",
+          "AllowEllipsis" : false,
+          "Area" : "UI",
+          "DisplayName" : "label-14",
+          "Height" : 67,
+          "Id" : "label-14",
+          "Left" : 65,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultLabelStyle",
+          "Text" : "&#1047;&#1085;&#1072;&#1095;&#1085;&#1086;&#1077;:",
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 250,
+          "Type" : "label",
+          "Visible" : true,
+          "Width" : 185,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Метка",
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      } ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "AutoEvaluate" : true,
+        "DataChangeType" : "VALUE",
+        "DisplayName" : "updateMin",
+        "Expression" : "return isSigned ? 0 : -8;\n",
+        "FireOnFirstValue" : true,
+        "Height" : 28,
+        "Id" : "expression-7",
+        "Left" : 0,
+        "OutputBaseType" : "NUMBER",
+        "ShowDataLoading" : true,
+        "Top" : 0,
+        "Type" : "expression",
+        "Visible" : true,
+        "Width" : 200,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Выражение",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "BOOLEAN",
+          "DefaultValue" : "false",
+          "Description" : "",
+          "ParameterName" : "isSigned",
+          "isValid" : true
+        } ],
+        "editMode" : "edit",
+        "helperType" : "expression",
+        "isSigned" : "false",
+        "parameters" : [ {
+          "BaseType" : "BOOLEAN",
+          "DefaultValue" : "false",
+          "Description" : "",
+          "ParameterName" : "isSigned",
+          "isValid" : true
+        } ],
+        "parametersToDelete" : [ ]
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "AutoEvaluate" : true,
+        "DataChangeType" : "VALUE",
+        "DisplayName" : "updateMax",
+        "Expression" : "return isSigned ? 15 : 7;\n",
+        "FireOnFirstValue" : true,
+        "Height" : 28,
+        "Id" : "expression-8",
+        "Left" : 0,
+        "OutputBaseType" : "NUMBER",
+        "ShowDataLoading" : true,
+        "Top" : 0,
+        "Type" : "expression",
+        "Visible" : true,
+        "Width" : 200,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Выражение",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "BOOLEAN",
+          "DefaultValue" : "false",
+          "Description" : "",
+          "ParameterName" : "isSigned",
+          "isValid" : true
+        } ],
+        "editMode" : "edit",
+        "helperType" : "expression",
+        "isSigned" : "false",
+        "parameters" : [ {
+          "BaseType" : "BOOLEAN",
+          "DefaultValue" : "false",
+          "Description" : "",
+          "ParameterName" : "isSigned",
+          "isValid" : true
+        } ],
+        "parametersToDelete" : [ ]
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "AutoEvaluate" : true,
+        "DataChangeType" : "VALUE",
+        "DisplayName" : "updateVal",
+        "Expression" : "return number;",
+        "FireOnFirstValue" : true,
+        "Height" : 28,
+        "Id" : "expression-10",
+        "Left" : 0,
+        "OutputBaseType" : "NUMBER",
+        "ShowDataLoading" : true,
+        "Top" : 0,
+        "Type" : "expression",
+        "Visible" : true,
+        "Width" : 200,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Выражение",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "NUMBER",
+          "DefaultValue" : "0",
+          "Description" : "",
+          "ParameterName" : "number",
+          "isValid" : true
+        } ],
+        "editMode" : "edit",
+        "helperType" : "expression",
+        "number" : "0",
+        "parameters" : [ {
+          "BaseType" : "NUMBER",
+          "DefaultValue" : "0",
+          "Description" : "",
+          "ParameterName" : "number",
+          "isValid" : true
+        } ],
+        "parametersToDelete" : [ ]
+      },
+      "Widgets" : [ ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent><preview/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated&#10;" timestamp="2025-05-29T10:40:16.692+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2025-05-29T10:51:27.959+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2025-05-29T10:52:26.032+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2025-05-29T10:55:30.797+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2025-05-29T10:57:32.637+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2025-05-29T10:59:48.885+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2025-05-29T11:02:38.462+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2025-05-29T11:08:27.374+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2025-05-29T11:11:01.392+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2025-05-29T11:13:10.068+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2025-05-29T11:16:00.755+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="SetProjectName : [MyLab13]" timestamp="2025-05-29T12:40:32.483+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="SetProjectName : [MyLab13]" timestamp="2025-05-29T12:40:32.505+06:00" user="Administrator"/></ConfigurationChanges></Mashup></Mashups><ScriptFunctionLibraries/><Projects><Project dependsOn="" description="" documentationContent="" homeMashup="" lastModifiedDate="2025-05-29T12:40:32.348+06:00" name="MyLab13" packageVersion="1.0.0" projectName="MyLab13" tags=""><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated&#10;" timestamp="2025-05-28T21:56:14.464+06:00" user="Administrator"/></ConfigurationChanges></Project></Projects><Users/><DirectoryServices/><Widgets/><MediaEntities/><Groups/><PersistenceProviders/><NotificationContents/><ModelTags/><LocalizationTables/><Dashboards/><StyleThemes/><DataAnalysisDefinitions/><DataShapes><DataShape baseDataShape="" description="Remote Terminal Previous Values" documentationContent="" homeMashup="" lastModifiedDate="2025-05-29T12:40:32.510+06:00" name="RTPV" projectName="MyLab13" tags=""><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><FieldDefinitions><FieldDefinition aspect.defaultValue="0" aspect.isPrimaryKey="false" baseType="INTEGER" description="Кнопка 1" name="b1" ordinal="2"/><FieldDefinition aspect.defaultValue="0" aspect.isPrimaryKey="false" baseType="INTEGER" description="Кнопка 2" name="b2" ordinal="3"/><FieldDefinition aspect.defaultValue="0" aspect.isPrimaryKey="false" baseType="INTEGER" description="Кнопка 3" name="b3" ordinal="4"/><FieldDefinition aspect.defaultValue="0" aspect.isPrimaryKey="false" baseType="INTEGER" description="Свитч" name="p" ordinal="1"/></FieldDefinitions><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated, description : updated&#10;fields : p : added, b1 : added, p : updated, b2 : added, b3 : added, b2 : updated, b3 : updated&#10;" timestamp="2025-05-29T01:58:43.304+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="SetProjectName : [MyLab13]" timestamp="2025-05-29T12:40:32.494+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="SetProjectName : [MyLab13]" timestamp="2025-05-29T12:40:32.511+06:00" user="Administrator"/></ConfigurationChanges></DataShape></DataShapes><Things><Thing description="" documentationContent="" effectiveThingPackage="ConfiguredThing" enabled="true" homeMashup="" identifier="" lastModifiedDate="2025-05-29T12:41:00.228+06:00" name="RemoteTerminal" projectName="MyLab13" published="false" tags="" thingTemplate="RemoteTerminalTemplate" valueStream=""><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><ThingShape><PropertyDefinitions/><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations/><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings/><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations/><ImplementedShapes/><ThingProperties/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated, projectName : updated, thingTemplate : updated&#10;" timestamp="2025-05-29T12:41:00.227+06:00" user="Administrator"/></ConfigurationChanges></Thing></Things><Logs/><Authenticators/><ThingPackages/><NotificationDefinitions/><ApplicationKeys/><StateDefinitions/><ThingTemplates><ThingTemplate baseThingTemplate="GenericThing" description="" documentationContent="" effectiveThingPackage="ConfiguredThing" homeMashup="" lastModifiedDate="2025-05-29T12:40:32.499+06:00" name="RemoteTerminalTemplate" projectName="MyLab13" tags="" thingPackage="" valueStream=""><Owner name="Administrator" type="User"/><avatar><![CDATA[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]]></avatar><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><PropertyBindings/><RemotePropertyBindings/><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="isSigned"/><AlertDefinitions name="number"/><AlertDefinitions name="RTPV"/></AlertConfigurations><ThingShape><PropertyDefinitions><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="VALUE" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="isSigned" ordinal="4"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="VALUE" aspect.defaultValue="3" aspect.maximumValue="15" aspect.minimumValue="-8" baseType="INTEGER" category="" description="" isLocalOnly="false" name="number" ordinal="2"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="VALUE" aspect.defaultValue="0.0,0.0,0.0,0.0" baseType="VEC4" category="" description="Remote Terminal Previous Values" isLocalOnly="false" name="RTPV" ordinal="4"/></PropertyDefinitions><ServiceDefinitions><ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="InOut"><ResultType baseType="JSON" description="" name="result" ordinal="0"/><ParameterDefinitions><FieldDefinition baseType="NUMBER" description="" name="b1" ordinal="2"/><FieldDefinition baseType="NUMBER" description="" name="b2" ordinal="3"/><FieldDefinition baseType="NUMBER" description="" name="b3" ordinal="4"/><FieldDefinition baseType="NUMBER" description="" name="p" ordinal="1"/></ParameterDefinitions></ServiceDefinition></ServiceDefinitions><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="InOut"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// Здорова, ребятки! Ну чё, поедим пиццки? Что у нас здесь сегодня, смотрим?
+// Старина Пэйпа, старина Джонс, посмотрим. Я такую кстати ни разу ни ел, ща посмотрим.
+// Как она открывается я не знаю. Ща раздерем эту глыбу. Хыыых еле-еле открыл! Хе-хе-хе!!
+// Ща попробуем. Берите вместе со мной ребятки пиццку кусочек. Лааадно пойдёт!)) 
+
+logger.info("Значение number -- " + me.number.toString());
+logger.info("Значение isSigned -- " + me.isSigned.toString());
+logger.info("Значение свитча -- " + p.toString());
+logger.info("Значение кнопки 1 -- " + b1.toString());
+logger.info("Значение кнопки 2 -- " + b2.toString());
+logger.info("Значение кнопки 3 -- " + b3.toString());
+
+// Свитч signed <--> unsigned
+if (p !== me.RTPV.x) {
+    me.number = 0;
+    me.isSigned = p === 1;
+}
+// Кнопка-инкрементатор
+else if (b1 > me.RTPV.y) {
+    if (
+        (me.isSigned && me.number < 7) ||
+        (!me.isSigned && me.number < 15)
+    ) {
+		me.number += 1;   
+    }
+}
+// Кнопка-декрементатор
+else if (b2 > me.RTPV.z) {
+    if (
+        (me.isSigned && me.number > -8) ||
+        (!me.isSigned && me.number > 0)
+    ) {
+		me.number -= 1;   
+    }
+}
+// Кнопка-инвертирователь
+else if (b3 > me.RTPV.w) {
+	if (me.isSigned) {
+        me.number = -me.number - 1;
+    }
+    else {
+        me.number = 15 - me.number;
+    }
+}
+
+me.RTPV = { 'x': p, 'y': b1, 'z': b2, 'w': b3 };
+
+// Конвертируем в бит эррэй!
+result = {
+	'L1': ((me.number & 15) & 8) ? 1 : 0,
+    'L2': ((me.number & 15) & 4) ? 1 : 0,
+    'L3': ((me.number & 15) & 2) ? 1 : 0,
+    'L4': ((me.number & 15) & 1) ? 1 : 0,
+};
+]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><ImplementedShapes/><SharedConfigurationTables/><InstanceDesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></InstanceDesignTimePermissions><InstanceRunTimePermissions/><InstanceVisibilityPermissions><Visibility/></InstanceVisibilityPermissions><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated, baseThingTemplate : updated&#10;" timestamp="2025-05-28T22:05:45.935+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service added&#10;" timestamp="2025-05-28T22:11:40.460+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-28T22:14:25.273+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="SetProjectName : [MyLab13]" timestamp="2025-05-28T22:18:48.466+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="SetProjectName : [MyLab13]" timestamp="2025-05-28T22:18:48.471+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : input parameter p added, inputs updated, input parameter b1 added, inputs updated, input parameter b2 added, inputs updated, input parameter b3 added, inputs updated&#10;" timestamp="2025-05-29T00:17:52.728+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : output updated&#10;" timestamp="2025-05-29T00:26:34.375+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="properties : number : added, isSigned : added&#10;services : InOut : service updated&#10;" timestamp="2025-05-29T01:35:52.486+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="properties : number : updated&#10;services : InOut : service updated&#10;" timestamp="2025-05-29T01:38:35.641+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T01:39:51.345+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="header : avatar : updated&#10;" timestamp="2025-05-29T01:50:48.837+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T01:54:07.093+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="properties : RTPV : added, isSigned : removed, isSigned : added&#10;services : InOut : service updated&#10;" timestamp="2025-05-29T02:08:38.414+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="properties : RTPV : updated&#10;services : InOut : service updated&#10;" timestamp="2025-05-29T02:10:37.843+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T02:12:07.328+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T02:32:02.642+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T09:46:18.972+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T09:51:31.932+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T09:59:58.762+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T10:04:35.375+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T10:05:44.491+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T10:11:42.330+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T10:18:45.602+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="properties : number : updated&#10;services : InOut : service updated&#10;" timestamp="2025-05-29T10:21:04.648+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T10:29:10.270+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T10:31:44.267+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T10:35:22.506+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : InOut : service updated&#10;" timestamp="2025-05-29T12:39:20.842+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="SetProjectName : []" timestamp="2025-05-29T12:40:32.469+06:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="SetProjectName : [MyLab13]" timestamp="2025-05-29T12:40:32.499+06:00" user="Administrator"/></ConfigurationChanges></ThingTemplate></ThingTemplates><ExtensionPackages/><Organizations/><Menus/><Resources/><DataTags/><ThingShapes/><Subsystems/></Entities>

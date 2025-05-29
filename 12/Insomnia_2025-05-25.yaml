@@ -5,7 +5,7 @@ meta:
   created: 1748116798814
   modified: 1748116798814
 collection:
-  - url: "{{ _.base_path }}/Things/CombinedSensor"
+  - url: "http://localhost:443/Thingworx/Things/CombinedSensor"
     name: Обращение к CombinedSensor
     meta:
       id: req_f7ced7365937403ab3ed3a0995145780
@@ -29,7 +29,7 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: "{{ _.base_path }}/Things/CombinedSensor/Services/GetTemperature"
+  - url: "http://localhost:443/Thingworx/Things/CombinedSensor/Services/GetTemperature"
     name: Получение значения температуры
     meta:
       id: req_feac70cddd2e4faab171345aafaf58ce
@@ -58,7 +58,7 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: "{{ _.base_path }}/Things/CombinedSensor/Services/SetTemperature"
+  - url: "http://localhost:443/Thingworx/Things/CombinedSensor/Services/SetTemperature"
     name: Установка значения температуры
     meta:
       id: req_88108be8ff78477c905657a0513f8ce2
@@ -98,18 +98,3 @@ collection:
         send: true
         store: true
       rebuildPath: true
-cookieJar:
-  name: Default Jar
-  meta:
-    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
-    created: 1748116900236
-    modified: 1748116900236
-environments:
-  name: Base Environment
-  meta:
-    id: env_99d30891da4bdcebc63947a8fc17f076de878684
-    created: 1748116900121
-    modified: 1748150745371
-    isPrivate: false
-  data:
-    base_path: http://localhost:443/Thingworx
