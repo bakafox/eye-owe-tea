@@ -4,7 +4,7 @@
 
 https://www.ozon.ru/product/tsvetnoy-ips-tft-displey-na-st7789-spi-s-razresheniem-240-240-1-3-1919951381
 
-**Тесты 4–6** — для дисплея ST7735 (128×160 led 1.8"):
+**Тесты 4–5** — для дисплея ST7735 (128×160 led 1.8"):
 
 https://www.ozon.ru/product/tsvetnoy-displey-1-8-tft-lcd-128x160-st7735s-spi-interfeys-1059309255
 
